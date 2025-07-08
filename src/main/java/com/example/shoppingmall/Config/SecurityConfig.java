@@ -41,7 +41,8 @@ public class SecurityConfig {
         //authorization 정책 설정
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/", "/user_login", "/user_login_error", "/user_join",
+                        .requestMatchers("/", "/index",
+                                         "/user_login", "/user_login_error", "/user_join",
                                          "/css/**", "/js/**", "/assets/**",
                                          "/board/list").permitAll()
                         .requestMatchers("/user_logout").hasAnyRole("USER", "ADMIN")
