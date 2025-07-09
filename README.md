@@ -11,7 +11,7 @@ Bootstrap 5를 활용해 반응형 UI를 구현하였으며, PostgreSQL을 데�
 ### 쇼핑몰 기능 (구현 예정)
 - 상품 목록 / 상세 페이지
 - 장바구니
-- 주문 및 결제 (기본 로직)
+- 주문 및 결제
 - 사용자 회원가입 / 로그인 / 마이페이지
 - 카테고리별 상품 필터링
 
@@ -42,7 +42,7 @@ Bootstrap 5를 활용해 반응형 UI를 구현하였으며, PostgreSQL을 데�
 1. **프로젝트 클론**
    ```bash
    git clone https://github.com/JinnyBee/personal_202507_shoppingmall.git
-   cd your-repo-name
+   cd personal_202507_shoppingmall
 
 2. **DB 설정**
 `application.properties` 파일 중 PostgreSQL 연결 관련 설정 정보
@@ -68,7 +68,7 @@ Bootstrap 5를 활용해 반응형 UI를 구현하였으며, PostgreSQL을 데�
    ./gradlew bootRun
 
 4. **웹 접속**
-   ```chrome
+   ```bash
    http://localhost:8080
 
 5. **디렉토리 구조**
