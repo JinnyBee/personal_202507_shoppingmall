@@ -16,16 +16,16 @@ import java.io.IOException;
 public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler {
 
     @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception)
+            throws IOException, ServletException {
 
+        //onAuthenticationFailure: 로그인 실패 시 자동으로 호출되는 메서도
+        //exception: 로그인 실패 원인이 담긴 예외 객체
         log.info("onAuthenticationFailure() 아이디나 비밀번호가 다릅니다");
+        log.info("onAuthenticationFailure() exception={}", exception.getMessage());
 
-        request.setAttribute("errorMessage","아이디나 비밀번호가 다릅니다.");
+        request.setAttribute("errorMessage","로그인 실패!!! 아이디나 비밀번호가 다릅니다.");
         RequestDispatcher dispatcher = request.getRequestDispatcher("/user_login_error");
         dispatcher.forward(request, response);
-
-        //request.getSession().setAttribute("errorMessage", "아이디나 비밀번호가 다릅니다.");
-        //response.sendRedirect("/user_login");
-        //response.sendRedirect("/");
     }
 }

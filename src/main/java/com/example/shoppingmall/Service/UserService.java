@@ -31,6 +31,22 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+
+        //로그인 시 사용자의 ID(email)를 받아옴
+        //사용자 테이블에서 email로 사용자 검색
+        UserEntity userEntity = userRepository
+                .findByEmail(email)
+                .orElseThrow(()-> new UsernameNotFoundException("사용자 없음: " + email));
+
+        return User.builder()
+                .username(userEntity.getEmail())
+                .password(userEntity.getPassword())
+                .roles(userEntity.getRole().toString())
+                .build();
+    }
+
     //회원가입
     public void registerUser(UserDTO userDTO) {
 
@@ -47,21 +63,8 @@ public class UserService implements UserDetailsService {
         userRepository.save(userEntity);
     }
 
-
-
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UserEntity userEntity = userRepository.findByEmail(email).orElseThrow();
-
-        return User.builder()
-                .username(userEntity.getEmail())
-                .password(userEntity.getPassword())
-                .roles(userEntity.getRole().toString())
-                .build();
-    }
-
     //회원정보 조회
-    public UserEntity getLdoginUser(String email) {
+    public UserEntity getLoginUser(String email) {
 
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new NoSuchElementException("해당 이메일의 사용자를 찾을 수 없습니다: " + email));
